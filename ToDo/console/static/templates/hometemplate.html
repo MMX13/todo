@@ -1,5 +1,4 @@
 <div ng-controller="todoCtrl">
-    <div class="container">
         <div class="navbar navbar-default">
             <form ng-submit="createTask()">
                 <div class="input-group input-group-lg" >
@@ -12,8 +11,7 @@
                 </div>
             </form>
         </div>
-    </div>
-    <div class="container taskfield">
+    <div class="taskfield">
         <task-list title="Today" collapsed="false" tasks="todaysTasks" update="testTask()"></task-list>
         <task-list title="Future" collapsed="true" tasks="futureTasks" update="testTask()"></task-list>
         <task-list title="Someday" collapsed="true" tasks="unscheduledTasks" update="testTask()"></task-list>
