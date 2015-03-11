@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div ng-controller="todoCtrl">
+    <div class="container">
+        <div class="navbar navbar-default">
+            <form ng-submit="createTask()">
+                {% csrf_token %}
+                <div class="input-group input-group-lg" >
+                    <input type="text" class="form-control" name="description" ng-model="newTask" placeholder="Type new task here"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit">
+                            <span class="glyphicon glyphicon-plus glyphicon-plus"></span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container taskfield">
+        <task-list title="Today" collapsed="false" tasks="todaysTasks" update="testTask()"></task-list>
+        <task-list title="Future" collapsed="true" tasks="futureTasks" update="testTask()"></task-list>
+        <task-list title="Overdue" collapsed="true" tasks="overdueTasks" update="testTask()"></task-list>
+    </div>
+</div>
+{% endblock %}

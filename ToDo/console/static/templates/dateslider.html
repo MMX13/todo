@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <datepicker ng-model="datePick" min-date="todaysDate"></datepicker>
+            <span class="col-md-8 text-center">Current date is: {{ datePick | date:'shortDate' }}</span>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-primary" ng-click="applyDate()">Update</button>
+    <button class="btn btn-warning" ng-click="cancelModal()">Back</button>
+</div>

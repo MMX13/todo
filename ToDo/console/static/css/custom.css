@@ -1,0 +1,68 @@
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 750px;
+  }
+}
+
+.taskfield {
+    font-size: 1.5em;
+}
+
+.click_header {
+    cursor: pointer;
+}
+
+.testTrans
+{
+    width: 100px;
+    background-color:cornflowerblue;
+}
+
+.slideContainer{
+    width: 300px;
+}
+
+.slideBox{
+    overflow: hidden;
+    position: relative;
+    height: 200px;
+    padding: 25px 0 0 0;
+}
+
+.reveal {
+    position: absolute;
+    display: block;
+    height: 150px;
+    width: 300px;
+    transition: 600ms;
+}
+
+.reveal.ng-hide-add {
+  left: 0;
+  opacity: 1;
+}
+
+.reveal.ng-hide-remove {
+  left: 100%;
+  opacity: 1;
+}
+
+.reveal.ng-hide-add.ng-hide-add-active {
+  left: -100%;
+  opacity: 0;
+}
+
+.reveal.ng-hide-remove.ng-hide-remove-active {
+  left: 0;
+  opacity: 1;
+}

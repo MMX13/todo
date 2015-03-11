@@ -1,0 +1,25 @@
+<span ng-click="collapsed=!collapsed" class="click_header"><h3>{{ title }}</h3></span>
+<div collapse="collapsed">
+    <ul class="list-group">
+        <div ng-repeat="task in tasks">
+            <li class="list-group-item click_header" ng-click="show=!show">
+                <span ng-bind="task.description" ng-hide="edit" ></span>
+                <input ng-model="task.description" ng-show="edit" ng-blur="edit = false; show = false; updateTaskDesc(task)"/>
+                <span class="pull-right" ng-show="show||edit">
+                    <button class="btn btn-default" ng-click="edit=!edit"><span class="glyphicon glyphicon-pencil"></span></button>
+                </span>
+            </li>
+            <li class="list-group-item" ng-show="show||edit">
+                <div class="row text-center" >
+                    <span class="col-md-4"><button class="btn btn-default" tooltip="Schedule task" ng-click="openDateSlider(task)"><span class="glyphicon glyphicon-calendar"></span></button></span>
+                    <span class="col-md-4"><button class="btn btn-default" tooltip="Add note"><span class="glyphicon glyphicon-edit"></span></button></span>
+                    <span class="col-md-4">
+                        <a href="#/details/{{ task.pk }}" class="btn btn-default" tooltip="Task details">
+                            <span class="glyphicon glyphicon-option-horizontal"></span>
+                        </a>
+                    </span>
+                </div>
+            </li>
+        </div>
+    </ul>
+</div>
