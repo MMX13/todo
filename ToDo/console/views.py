@@ -1,10 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
-from models import Task
+from console.models import Task
 from datetime import datetime, date, timedelta
 from rest_framework import generics
-from serializers import TaskSerializer
+from console.serializers import TaskSerializer
 
 # Create your views here.
 def taskview(request):
