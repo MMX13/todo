@@ -14,6 +14,10 @@
   }
 }
 
+.navbar-container{
+    padding: 0 0 0 0;
+}
+
 .taskfield {
     font-size: 1.5em;
 }
@@ -26,10 +30,6 @@
 {
     width: 100px;
     background-color:cornflowerblue;
-}
-
-.slideContainer{
-    width: 300px;
 }
 
 .slideBox{
@@ -45,6 +45,7 @@
     height: 150px;
     width: 300px;
     transition: 600ms;
+    padding: 0 0 0 25px;
 }
 
 .reveal.ng-hide-add {

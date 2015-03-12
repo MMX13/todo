@@ -99,7 +99,7 @@ todoApp.factory('taskService', function ($http, $log, $q){
 
     return {
         getTasks: function(){
-            return $http.get('http://127.0.0.1:8000/api/tasks/')
+            return $http.get('/api/tasks/')
                 .then(function(response){
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -113,7 +113,7 @@ todoApp.factory('taskService', function ($http, $log, $q){
                 });
         },
         getTask: function(taskId){
-            return $http.get('http://127.0.0.1:8000/api/task/'+taskId)
+            return $http.get('/api/task/'+taskId)
                 .then(function(response){
                     if(typeof response.data === 'object') {
                         console.log(response.data);
@@ -123,13 +123,13 @@ todoApp.factory('taskService', function ($http, $log, $q){
         },
         addTasks: function(taskDesc, todaysDate){
             data = {description: taskDesc, scheduledDate: todaysDate};
-            return $http.post('http://127.0.0.1:8000/api/tasks/', data)
+            return $http.post('/api/tasks/', data)
                 .then(function(response){
                    console.log(response);
                 });
         },
         updateTask: function(task){
-            return $http.put('http://127.0.0.1:8000/api/task/'+task.pk+'/', {'description':task.description,'scheduledDate':task.scheduledDate,'scheduled':task.scheduled})
+            return $http.put('/api/task/'+task.pk+'/', {'description':task.description,'scheduledDate':task.scheduledDate,'scheduled':task.scheduled})
                 .error(function(response){
                     console.log(response);
                 });
