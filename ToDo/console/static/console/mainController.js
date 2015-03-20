@@ -30,6 +30,40 @@ todoApp.filter('dueDate', function(){
     }
 });
 
+todoApp.filter('taskSet', function(){
+    var todaysDate = new Date().toISOString().split('T')[0];
+    return function(tasks, category){
+        if(typeof tasks !='undefined') {
+            switch (category) {
+                case 'Today':
+                    return tasks.filter(function (task) {
+                        return task.scheduledDate == todaysDate;
+                    });
+                    break;
+                case 'Future':
+                    return tasks.filter(function (task) {
+                        return task.scheduledDate > todaysDate;
+                    });
+                    break;
+                case 'Someday':
+                    return tasks.filter(function (task) {
+                        return task.scheduled == false;
+                    });
+                    break;
+                case 'Overdue':
+                    return tasks.filter(function (task) {
+                        return task.scheduledDate < todaysDate;
+                    });
+                case 'quick':
+                    return tasks.filter(function (task) {
+                       return task.scheduledDate == todaysDate || task.scheduledDate < todaysDate || task.scheduled == false;
+                    });
+                default:
+            }
+        }
+    }
+});
+
 todoApp.controller('todoCtrl', ['$scope', '$log', '$modal', 'taskService', function ($scope, $log, $modal, taskService){
     $scope.current = 0;
     var todaysDate = new Date().toISOString().split('T')[0];
@@ -44,6 +78,7 @@ todoApp.controller('todoCtrl', ['$scope', '$log', '$modal', 'taskService', funct
        });
     };
 
+
     $scope.sortTasks = function(taskList){
         var tasks=taskList.sort(function(a, b){
                 if (b.pk>a.pk){
@@ -51,24 +86,9 @@ todoApp.controller('todoCtrl', ['$scope', '$log', '$modal', 'taskService', funct
                 }
             });
             $scope.allTasks = tasks;
-
-            var scheduledTasks = tasks.filter(function(task){
-                return task.scheduled == true;
+            $scope.quickTasks = tasks.filter(function (task) {
+                       return task.scheduledDate == todaysDate || task.scheduledDate < todaysDate || task.scheduled == false;
             });
-            $scope.unscheduledTasks = tasks.filter(function(task){
-               return task.scheduled == false;
-            });
-            $scope.todaysTasks = scheduledTasks.filter(function(task){
-                return task.scheduledDate==todaysDate;
-            });
-            $scope.futureTasks = scheduledTasks.filter(function(tasks){
-                return tasks.scheduledDate>todaysDate
-            });
-            $scope.overdueTasks = scheduledTasks.filter(function(task){
-                return task.scheduledDate<todaysDate;
-            });
-            $scope.quickTasks = [];
-            $scope.quickTasks = $scope.quickTasks.concat($scope.todaysTasks).concat($scope.overdueTasks).concat($scope.unscheduledTasks);
     };
 
     $scope.createTask = function(){
@@ -76,6 +96,7 @@ todoApp.controller('todoCtrl', ['$scope', '$log', '$modal', 'taskService', funct
         taskService.addTasks($scope.newTask, todaysDate).then(function(){
             updateTasks();
         });
+        $scope.newTask="";
     };
 
     $scope.schedule = function(task, days){
@@ -99,7 +120,7 @@ todoApp.factory('taskService', function ($http, $log, $q){
 
     return {
         getTasks: function(){
-            return $http.get('http://127.0.0.1:8000/api/tasks/')
+            return $http.get('/api/tasks/')
                 .then(function(response){
                     if (typeof response.data === 'object') {
                         return response.data;
@@ -113,7 +134,7 @@ todoApp.factory('taskService', function ($http, $log, $q){
                 });
         },
         getTask: function(taskId){
-            return $http.get('http://127.0.0.1:8000/api/task/'+taskId)
+            return $http.get('/api/task/'+taskId)
                 .then(function(response){
                     if(typeof response.data === 'object') {
                         console.log(response.data);
@@ -123,13 +144,13 @@ todoApp.factory('taskService', function ($http, $log, $q){
         },
         addTasks: function(taskDesc, todaysDate){
             data = {description: taskDesc, scheduledDate: todaysDate};
-            return $http.post('http://127.0.0.1:8000/api/tasks/', data)
+            return $http.post('/api/tasks/', data)
                 .then(function(response){
                    console.log(response);
                 });
         },
         updateTask: function(task){
-            return $http.put('http://127.0.0.1:8000/api/task/'+task.pk+'/', {'description':task.description,'scheduledDate':task.scheduledDate,'scheduled':task.scheduled})
+            return $http.put('/api/task/'+task.pk+'/', {'description':task.description,'scheduledDate':task.scheduledDate,'scheduled':task.scheduled,'notes':task.notes})
                 .error(function(response){
                     console.log(response);
                 });
@@ -165,8 +186,8 @@ todoApp.controller('taskListCtrl', ['$scope', '$modal', 'taskService', function(
                     modalInstance.dismiss();
                 };
                 $scope.applyDate = function(){
-                    task["scheduledDate"]=$scope.datePick.toISOString().split('T')[0];
-                    console.log(task);
+                    task.scheduledDate=$scope.datePick.toISOString().split('T')[0];
+                    task.scheduled = true;
                     taskService.updateTask(task);
                     modalInstance.dismiss();
                 }
@@ -185,13 +206,14 @@ todoApp.factory('dateService',function($modal){
                     $scope.datePick = task["scheduledDate"];
                     $scope.cancelModal = function(){
                         modalInstance.dismiss();
-                };
-                $scope.applyDate = function(){
-                    task["scheduledDate"]=$scope.datePick.toISOString().split('T')[0];
-                    console.log(task);
-                    taskService.updateTask(task);
-                    modalInstance.dismiss();
-                }
+                    };
+                    $scope.applyDate = function(){
+                        task.scheduled=true;
+                        task["scheduledDate"]=$scope.datePick.toISOString().split('T')[0];
+                        console.log(task);
+                        taskService.updateTask(task);
+                        modalInstance.dismiss();
+                    }
                 }
             })
         }

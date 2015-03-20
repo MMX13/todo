@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import render
-from models import Task
+from rest_framework.viewsets import ModelViewSet
+from console.models import Task
 from datetime import datetime, date, timedelta
 from rest_framework import generics
-from serializers import TaskSerializer
+from console.serializers import TaskSerializer
 
 # Create your views here.
 def taskview(request):
@@ -33,6 +34,9 @@ def detailsview(request, task_id):
     return render(request, 'task_details.html', context)
 
 
+#Use ModelView instead
+#class test(ModelViewSet)
+#need to set up routes to use ModelViewSet
 class ApiTaskView(generics.ListCreateAPIView):
     model = Task
     serializer_class = TaskSerializer

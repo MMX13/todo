@@ -14,22 +14,16 @@
   }
 }
 
+.navbar-container{
+    padding: 0 0 0 0;
+}
+
 .taskfield {
     font-size: 1.5em;
 }
 
 .click_header {
     cursor: pointer;
-}
-
-.testTrans
-{
-    width: 100px;
-    background-color:cornflowerblue;
-}
-
-.slideContainer{
-    width: 300px;
 }
 
 .slideBox{
@@ -40,11 +34,13 @@
 }
 
 .reveal {
+    font-size: 2em;
     position: absolute;
     display: block;
     height: 150px;
-    width: 300px;
+    width: 100%;
     transition: 600ms;
+    padding: 25px 0 0 25px;
 }
 
 .reveal.ng-hide-add {

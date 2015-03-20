@@ -10,8 +10,8 @@
     </facet>
   </component>
   <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="inheritedJdk" />
+    <content url="file://$MODULE_DIR$/ToDo" />
+    <orderEntry type="jdk" jdkName="Python 2.7.8 virtualenv at C:\Dev\Personal\ToDoGit\venv" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Django Lib" level="project" />
   </component>
