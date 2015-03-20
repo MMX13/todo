@@ -108,8 +108,8 @@
       <file leaf-file-name="quickschedule.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ToDo/console/static/templates/quickschedule.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.20178041" vertical-offset="0" max-vertical-offset="674">
-              <caret line="8" column="84" selection-start-line="8" selection-start-column="84" selection-end-line="8" selection-end-column="84" />
+            <state vertical-scroll-proportion="0.83234423" vertical-offset="0" max-vertical-offset="674">
+              <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -1127,8 +1127,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ToDo/console/static/templates/quickschedule.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.20178041" vertical-offset="0" max-vertical-offset="674">
-          <caret line="8" column="84" selection-start-line="8" selection-start-column="84" selection-end-line="8" selection-end-column="84" />
+        <state vertical-scroll-proportion="0.83234423" vertical-offset="0" max-vertical-offset="674">
+          <caret line="33" column="6" selection-start-line="33" selection-start-column="6" selection-end-line="33" selection-end-column="6" />
           <folding />
         </state>
       </provider>
